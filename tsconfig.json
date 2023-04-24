@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [
+      "es2019"
+    ],
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "pretty": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "useUnknownInCatchVariables": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "typeRoots": [
+      "@types",
+      "./node_modules/@types",
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "index.ts",
+
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "*.d.ts",
+    "dist"
+  ]
+}
