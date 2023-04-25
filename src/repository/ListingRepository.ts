@@ -1,7 +1,7 @@
 import { Listing } from '../models/Listing'
-import { ListingResponse } from '../type/ListingResponse'
 import { sequelize } from '../db'
 import { ListingCrud } from '../type/ListingCrud'
+import { ListingResponse } from '../type/ListingResponse'
 
 export class ListingRepository {
   public async findById(id: number): Promise<Listing | null> {
@@ -25,8 +25,8 @@ export class ListingRepository {
     })
   }
 
-  public async findByIdIncludedSubsidiaryAndCountryAndCompany(listingId: number): Promise<ListingResponse> {
-    const response = await sequelize.query(`
+  public async findByIdIncludedSubsidiaryAndCountryAndCompany(listingId: number): Promise<ListingResponse[]> {
+    const queryResult = await sequelize.query(`
         SELECT
             Subsidiary.id as subsidiaryId,
             Country.name as countryName,
@@ -53,8 +53,9 @@ export class ListingRepository {
                 WHERE l.state = 'ACTIVE'
                 GROUP BY lid) AS PlatformListing ON Listing.id = PlatformListing.lid
         WHERE Listing.id = ${listingId}
-    `) as ListingResponse[]
+    `)
 
-    return response[0]
+    const [ listings ] = queryResult
+    return listings as ListingResponse[]
   }
 }

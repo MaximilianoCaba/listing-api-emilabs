@@ -28,11 +28,11 @@ export class ListingService {
 
       await stepService.updateStepsByListingId(listingId, listingCrud.steps)
 
-      const response = await listingRepository.findByIdIncludedSubsidiaryAndCountryAndCompany(listingId)
+      const listingResponseList: ListingResponse[] = await listingRepository.findByIdIncludedSubsidiaryAndCountryAndCompany(listingId)
 
       await transaction.commit()
 
-      return response
+      return listingResponseList[0]
     } catch (error) {
       await transaction.rollback()
       if(error instanceof NotFoundError) {

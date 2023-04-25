@@ -113,12 +113,12 @@ async function insertObjects() {
     }])
 }
 
-global.beforeEach(async () => {
+global.beforeAll(async () => {
     await sequelize.authenticate()
     await sequelize.sync({ force: true })
     await insertObjects()
 });
 
-global.afterEach(async () => {
+global.afterAll(async () => {
     await sequelize.close()
 });
