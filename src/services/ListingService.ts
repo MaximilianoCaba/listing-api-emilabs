@@ -22,16 +22,7 @@ export class ListingService {
         throw new NotFoundError('Listing Not Found')
       }
 
-      await listing.update({
-        companyName: listingCrud.companyName || listing.companyName,
-        companyLogo: listingCrud.companyLogo || listing.companyLogo,
-        name: listingCrud.name || listing.name,
-        description: listingCrud.description || listing.description,
-        info: listingCrud.info || listing.info,
-        state: listingCrud.state || listing.state,
-        gs: listingCrud.gs || listing.gs,
-        criteria: listingCrud.criteria || listing.criteria,
-      })
+      await listingRepository.update(listing, listingCrud)
 
       const stepService = new StepService()
 
@@ -44,6 +35,9 @@ export class ListingService {
       return response
     } catch (error) {
       await transaction.rollback()
+      if(error instanceof NotFoundError) {
+        throw error
+      }
       throw new BadRequestError(error.message)
     }
   }

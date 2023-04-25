@@ -1,11 +1,16 @@
 import { Sequelize } from 'sequelize'
 import { getConfig } from '../config/config'
 
-const { databaseConfig } = getConfig()
+function getSequelize(): Sequelize {
+  const { databaseConfig, nodeEnv } = getConfig()
+  const { database, user, pass, host } = databaseConfig
+  if (nodeEnv === 'test') {
+    return new Sequelize('sqlite::memory:')
+  }
+  return new Sequelize(database, user, pass, {
+    host,
+    dialect: 'postgres'
+  })
+}
 
-const { database, user, pass, host } = databaseConfig
-
-export const sequelize = new Sequelize(database, user, pass, {
-  host,
-  dialect: 'postgres'
-})
+export const sequelize = getSequelize()

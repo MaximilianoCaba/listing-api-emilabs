@@ -31,11 +31,9 @@
   "include": [
     "src/**/*.ts",
     "index.ts",
-
   ],
   "exclude": [
     "**/node_modules",
-    "**/.*/",
     "*.d.ts",
     "dist"
   ]

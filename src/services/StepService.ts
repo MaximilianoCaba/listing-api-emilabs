@@ -1,4 +1,3 @@
-import { Step } from '../models/Step'
 import { StepCrud } from '../type/StepCrud'
 import { StepRepository } from '../repository/StepRepository'
 
@@ -13,31 +12,16 @@ export class StepService {
     const stepsToUpdate = stepsCrud.filter( step => step.id && step.id > 0)
     const stepsToInsert = stepsCrud.filter( step => !step.id || (step.id && step.id < 0) )
 
-
-    // que funcion tiene esto?
     for (let i=0, len = stepsCrud.length; i < len; i++){
       stepsToDelete = stepsToDelete.filter( listingFlow => listingFlow.id !== stepsCrud[i].id)
     }
 
     const idStepsToDelete = stepsToDelete.map(step => step.id)
 
-    // TODO move to repository
-    const stepInsertedResult = await Step.bulkCreate(stepsToInsert.map((stepCrud) => ({
-      listingId,
-      flowId: stepCrud.flowId,
-      name: stepCrud.name,
-      step: stepCrud.step,
-    })))
-    console.log('stepInsertedResult', stepInsertedResult)
+    await stepRepository.bulkCreate(stepsToInsert, listingId)
 
-    // TODO move to repository
-    const resultDelete = await stepRepository.bulkDeleteByIds(idStepsToDelete)
-    console.log('resultDelete', resultDelete)
+    await stepRepository.bulkDeleteByIds(idStepsToDelete)
 
-    // TODO move to repositoru
-    const stepUpdatedResult = await Step.bulkCreate(stepsToUpdate.map((stepCrud) => ({
-      ...stepCrud
-    })), { updateOnDuplicate: [ 'flowId', 'name', 'step' ] })
-    console.log('stepUpdatedResult', stepUpdatedResult)
+    await stepRepository.bulkUpdate(stepsToUpdate)
   }
 }

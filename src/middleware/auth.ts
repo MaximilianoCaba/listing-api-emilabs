@@ -10,10 +10,6 @@ export function authMiddleware(
   next: NextFunction
 ): void {
 
-  if(req.path.toLowerCase().includes('auth')) {
-    return next()
-  }
-
   const token: string | undefined = req.headers[ 'authorization' ]
 
   if(!token) {

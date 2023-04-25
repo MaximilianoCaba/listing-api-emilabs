@@ -27,9 +27,11 @@ Subsidiary.init(
     },
     countryId: {
       type: DataTypes.INTEGER,
+      field: 'country_id'
     },
     companyId: {
       type: DataTypes.INTEGER,
+      field: 'company_id'
     },
     createdAt: {
       allowNull: false,
