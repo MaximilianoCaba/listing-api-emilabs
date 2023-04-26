@@ -20,8 +20,6 @@ function configurationApp(): Application {
     Server.buildServices(app, controller)
   })
 
-  // format error to JSON
-  // eslint-disable-next-line consistent-return
   app.use((err: Error, _req: express.Request, res: express.Response, next: express.NextFunction) => {
     let code = 500
     if (err instanceof HttpError){

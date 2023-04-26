@@ -16,8 +16,7 @@ export class StepRepository {
     return Step.findAll({
       where: {
         listingId,
-      },
-      transaction: this.transaction
+      }
     })
   }
 

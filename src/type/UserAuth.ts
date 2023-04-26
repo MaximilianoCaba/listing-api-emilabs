@@ -2,7 +2,7 @@ export interface User {
   subsidiaryId: number
 }
 
-export interface Decoded {
+export interface UserAuth {
   user: User
   authorities: string[]
 }

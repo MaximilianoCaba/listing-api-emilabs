@@ -1,10 +1,10 @@
-import { Decoded } from '../type/Decoded'
+import { UserAuth } from '../type/UserAuth'
 import jwt from 'jsonwebtoken'
 import { getConfig } from '../config/config'
 
 function generateToken(): void {
   const { apiSecretKey } = getConfig()
-  const decoded: Decoded = {
+  const decoded: UserAuth = {
     user: {
       subsidiaryId: 1
     },

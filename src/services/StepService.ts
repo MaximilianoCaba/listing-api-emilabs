@@ -7,7 +7,7 @@ import { getConfig } from '../config/config'
 import { Transaction } from 'sequelize'
 
 export class StepService {
-  public async updateStepsByListingId(listingId: number, stepRequestList: StepRequest[] = [], transaction: Transaction): Promise<void> {
+  public async updateStepsByListingId(listingId: number, stepRequestList: StepRequest[], transaction: Transaction): Promise<void> {
 
     const stepRepository = new StepRepository(transaction)
 

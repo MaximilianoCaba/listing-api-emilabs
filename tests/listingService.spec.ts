@@ -1,12 +1,12 @@
 import { ListingService } from '../src/services/ListingService'
-import { Decoded } from '../src/type/Decoded'
+import { UserAuth } from '../src/type/UserAuth'
 import { ListingRequest } from '../src/type/Listing'
 import { NotFoundError } from 'typescript-rest/dist/server/model/errors'
 
 describe('ListingService', () => {
 
   test('when have decode, listingCrud and listingId valid, update and return listing associated', async () => {
-    const decoded: Decoded = {
+    const decoded: UserAuth = {
       user: {
         subsidiaryId: 1
       },
@@ -51,7 +51,7 @@ describe('ListingService', () => {
   })
 
   test('when listing doesnt exist, throw error', async () => {
-    const decoded: Decoded = {
+    const decoded: UserAuth = {
       user: {
         subsidiaryId: 1
       },
@@ -67,7 +67,7 @@ describe('ListingService', () => {
   })
 
   test('when user.subsidiaryId not is equal to listing.subsidiaryId, throw error', async () => {
-    const decoded: Decoded = {
+    const decoded: UserAuth = {
       user: {
         subsidiaryId: 999
       },

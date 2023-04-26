@@ -9,7 +9,7 @@ export interface ListingRequest {
   state?: string
   gs?: string
   criteria?: string
-  steps: StepRequest[]
+  steps?: StepRequest[]
 }
 
 export interface ListingResponse {
