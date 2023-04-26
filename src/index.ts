@@ -4,12 +4,17 @@ import http from 'http'
 import { Server } from 'typescript-rest'
 import * as Controllers from '../src/controllers'
 import { HttpError } from 'typescript-rest/dist/server/model/errors'
-import { authMiddleware } from './middleware/auth'
+import { expressjwt } from 'express-jwt'
 
 function configurationApp(): Application {
   const app: Application = express()
 
-  app.use(authMiddleware)
+  const { apiSecretKey } = getConfig()
+
+  app.use(expressjwt({
+    secret: apiSecretKey,
+    algorithms: [ 'HS256' ]
+  }))
 
   Object.values(Controllers).map((controller) => {
     Server.buildServices(app, controller)
@@ -17,17 +22,18 @@ function configurationApp(): Application {
 
   // format error to JSON
   // eslint-disable-next-line consistent-return
-  app.use((err: unknown, _req: express.Request, res: express.Response, next: express.NextFunction) => {
+  app.use((err: Error, _req: express.Request, res: express.Response, next: express.NextFunction) => {
+    let code = 500
     if (err instanceof HttpError){
-      if (res.headersSent) {
-        return next(err)
-      }
-      res.set('Content-Type', 'application/json')
-      res.status(err.statusCode)
-      res.json({ error : err.message, code: err.statusCode })
-    } else {
-      next(err)
+      code = err.statusCode
     }
+    if (err.name && err.name === 'UnauthorizedError'){
+      code = 401
+    }
+    res.set('Content-Type', 'application/json')
+    res.status(code)
+    res.json({ error : err.message, code })
+    next()
   })
   return app
 }
