@@ -10,7 +10,7 @@ export class ListingService {
     const transaction = await sequelize.transaction()
     try {
 
-      const listingRepository = new ListingRepository()
+      const listingRepository = new ListingRepository(transaction)
       const listing = await listingRepository.findById(listingId)
 
       if (!listing) {
@@ -25,7 +25,7 @@ export class ListingService {
 
       const stepService = new StepService()
 
-      await stepService.updateStepsByListingId(listingId, listingCrud.steps)
+      await stepService.updateStepsByListingId(listingId, listingCrud.steps, transaction)
 
       const listingResponseList: ListingResponse[] = await listingRepository.findByIdIncludedSubsidiaryAndCountryAndCompany(listingId)
 

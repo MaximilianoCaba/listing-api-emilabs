@@ -4,11 +4,12 @@ import csvParser from 'csv-parser'
 import { Readable } from 'stream'
 import { sequelize } from '../db'
 import { getConfig } from '../config/config'
+import { Transaction } from 'sequelize'
 
 export class StepService {
-  public async updateStepsByListingId(listingId: number, stepRequestList: StepRequest[] = []): Promise<void> {
+  public async updateStepsByListingId(listingId: number, stepRequestList: StepRequest[] = [], transaction: Transaction): Promise<void> {
 
-    const stepRepository = new StepRepository()
+    const stepRepository = new StepRepository(transaction)
 
     const allStepFromDb = await stepRepository.findAllByListingId(listingId)
     let stepsToDelete = [ ...allStepFromDb ]

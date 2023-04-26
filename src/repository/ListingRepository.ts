@@ -1,8 +1,18 @@
 import { Listing } from '../models/Listing'
 import { sequelize } from '../db'
 import { ListingRequest, ListingResponse } from '../type/Listing'
+import { Transaction } from 'sequelize'
 
 export class ListingRepository {
+  
+  private readonly transaction: Transaction | undefined
+  
+  constructor(transaction?: Transaction) {
+    if (transaction) {
+      this.transaction = transaction
+    }
+  }
+  
   public async findById(id: number): Promise<Listing | null> {
     return Listing.findOne({
       where: {
@@ -21,7 +31,7 @@ export class ListingRepository {
       state: listingCrud.state || listing.state,
       gs: listingCrud.gs || listing.gs,
       criteria: listingCrud.criteria || listing.criteria,
-    })
+    }, { transaction: this.transaction })
   }
 
   public async findByIdIncludedSubsidiaryAndCountryAndCompany(listingId: number): Promise<ListingResponse[]> {
