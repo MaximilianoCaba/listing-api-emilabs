@@ -1,6 +1,6 @@
 import { ListingService } from '../src/services/ListingService'
 import { Decoded } from '../src/type/Decoded'
-import { ListingCrud } from '../src/type/ListingCrud'
+import { ListingRequest } from '../src/type/Listing'
 import { NotFoundError } from 'typescript-rest/dist/server/model/errors'
 
 describe('ListingService', () => {
@@ -13,7 +13,7 @@ describe('ListingService', () => {
       authorities : [ 'ROLE_EMPLOYEE' ]
     }
 
-    const listingCrud: ListingCrud = {
+    const listingCrud: ListingRequest = {
       'companyName': 'emilabs',
       'steps': [ 
         {
@@ -58,7 +58,7 @@ describe('ListingService', () => {
       authorities : [ 'ROLE_EMPLOYEE' ]
     }
 
-    const listingCrud: ListingCrud = { steps: [] }
+    const listingCrud: ListingRequest = { steps: [] }
 
     const listingService = new ListingService()
     await expect(() => listingService.update(decoded, 999, listingCrud)).rejects.toThrow(
@@ -74,7 +74,7 @@ describe('ListingService', () => {
       authorities : [ 'ROLE_EMPLOYEE' ]
     }
 
-    const listingCrud: ListingCrud = { steps: [] }
+    const listingCrud: ListingRequest = { steps: [] }
 
     const listingService = new ListingService()
     await expect(() => listingService.update(decoded, 1, listingCrud)).rejects.toThrow(

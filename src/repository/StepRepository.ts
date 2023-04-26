@@ -1,5 +1,5 @@
 import { Step } from '../models/Step'
-import { StepCrud } from '../type/StepCrud'
+import { StepBulk, StepRequest } from '../type/Step'
 
 export class StepRepository {
   public async findAllByListingId(listingId: number): Promise<Step[]> {
@@ -18,18 +18,24 @@ export class StepRepository {
     })
   }
 
-  public async bulkCreate(stepsCrud: StepCrud[], listingId: number): Promise<Step[]> {
-    return Step.bulkCreate(stepsCrud.map((stepCrud) => ({
+  public async bulkCreate(stepRequestList: StepRequest[], listingId: number): Promise<Step[]> {
+    return Step.bulkCreate(stepRequestList.map((stepRequest) => ({
       listingId,
-      flowId: stepCrud.flowId,
-      name: stepCrud.name,
-      step: stepCrud.step,
+      flowId: stepRequest.flowId,
+      name: stepRequest.name,
+      step: stepRequest.step,
     })))
   }
 
-  public async bulkUpdate(stepsCrud: StepCrud[]): Promise<Step[]> {
-    return Step.bulkCreate(stepsCrud.map((stepCrud) => ({
-      ...stepCrud
+  public async bulkUpdate(stepRequestList: StepRequest[]): Promise<Step[]> {
+    return Step.bulkCreate(stepRequestList.map((stepRequest) => ({
+      ...stepRequest
+    })), { updateOnDuplicate: [ 'flowId', 'name', 'step' ] })
+  }
+
+  public async bulkCreateCsv(stepBulkList: StepBulk[]): Promise<Step[]> {
+    return Step.bulkCreate(stepBulkList.map((stepRequest) => ({
+      ...stepRequest
     })), { updateOnDuplicate: [ 'flowId', 'name', 'step' ] })
   }
 }

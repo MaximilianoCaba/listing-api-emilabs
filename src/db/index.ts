@@ -9,7 +9,8 @@ function getSequelize(): Sequelize {
   }
   return new Sequelize(database, user, pass, {
     host,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: false
   })
 }
 

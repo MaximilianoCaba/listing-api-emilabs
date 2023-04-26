@@ -1,7 +1,6 @@
 import { Listing } from '../models/Listing'
 import { sequelize } from '../db'
-import { ListingCrud } from '../type/ListingCrud'
-import { ListingResponse } from '../type/ListingResponse'
+import { ListingRequest, ListingResponse } from '../type/Listing'
 
 export class ListingRepository {
   public async findById(id: number): Promise<Listing | null> {
@@ -12,7 +11,7 @@ export class ListingRepository {
     })
   }
   
-  public async update(listing: Listing, listingCrud: ListingCrud): Promise<Listing> {
+  public async update(listing: Listing, listingCrud: ListingRequest): Promise<Listing> {
     return listing.update({
       companyName: listingCrud.companyName || listing.companyName,
       companyLogo: listingCrud.companyLogo || listing.companyLogo,

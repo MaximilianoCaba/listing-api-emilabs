@@ -9,7 +9,8 @@ type ApiConfig = {
     user: string
     pass: string
     host: string
-  }
+  },
+  csvChunkProcess: number
 }
 
 export function getConfig(): ApiConfig {
@@ -24,6 +25,7 @@ export function getConfig(): ApiConfig {
       user: 'postgres',
       pass: '123456',
       host: 'localhost'
-    }
+    },
+    csvChunkProcess: 5000
   }
 }

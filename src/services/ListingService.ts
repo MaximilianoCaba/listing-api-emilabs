@@ -1,13 +1,12 @@
 import { Decoded } from '../type/Decoded'
 import { BadRequestError, NotFoundError } from 'typescript-rest/dist/server/model/errors'
-import { ListingCrud } from '../type/ListingCrud'
+import { ListingRequest, ListingResponse } from '../type/Listing'
 import { StepService } from './StepService'
 import { sequelize } from '../db'
 import { ListingRepository } from '../repository/ListingRepository'
-import { ListingResponse } from '../type/ListingResponse'
 
 export class ListingService {
-  public async update(decoded: Decoded, listingId: number, listingCrud: ListingCrud): Promise<ListingResponse> {
+  public async update(decoded: Decoded, listingId: number, listingCrud: ListingRequest): Promise<ListingResponse> {
     const transaction = await sequelize.transaction()
     try {
 

@@ -1,10 +1,9 @@
 import { ContextRequest, Param, Path, PreProcessor, PUT } from 'typescript-rest'
 import Request = Express.Request;
 import { ListingService } from '../services/ListingService'
-import { ListingCrud } from '../type/ListingCrud'
+import { ListingRequest, ListingResponse } from '../type/Listing'
 import { BadRequestError } from 'typescript-rest/dist/server/model/errors'
 import { Decoded } from '../type/Decoded'
-import { ListingResponse } from '../type/ListingResponse'
 
 function validatorUser(request: Request): Request {
   const { decoded } = request
@@ -15,12 +14,12 @@ function validatorUser(request: Request): Request {
   return request
 }
 
-@Path('/listing')
+@Path('/listings')
 export class ListingController {
   @PUT
   @PreProcessor(validatorUser)
   public update(
-    @Param('listingId') listingId: number, @ContextRequest request: Request, listingCrud: ListingCrud
+    @Param('listingId') listingId: number, @ContextRequest request: Request, listingCrud: ListingRequest
   ): Promise<ListingResponse> {
 
     const listingService = new ListingService()

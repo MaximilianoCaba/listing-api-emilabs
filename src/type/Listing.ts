@@ -1,3 +1,17 @@
+import { StepRequest } from './Step'
+
+export interface ListingRequest {
+  companyName?: string
+  companyLogo?: string
+  name?: string
+  description?: string
+  info?: string
+  state?: string
+  gs?: string
+  criteria?: string
+  steps: StepRequest[]
+}
+
 export interface ListingResponse {
   subsidiaryId?: number
   countryName?: string
