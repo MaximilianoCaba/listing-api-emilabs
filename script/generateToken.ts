@@ -1,6 +1,6 @@
-import { UserAuth } from '../type/UserAuth'
+import { UserAuth } from '../src/type/UserAuth'
 import jwt from 'jsonwebtoken'
-import { getConfig } from '../config/config'
+import { getConfig } from '../src/config/config'
 
 function generateToken(): void {
   const { apiSecretKey } = getConfig()

@@ -5,7 +5,7 @@ This service was working in an internal server, one day for an unknown reason, i
 This service doesn't have maintenance and the team that developed this no longer works at the company.
 It was possible to recover some files from this project, such as `sequelize models`, `listingController.js` and `package.json`, in old internal folders.
 
-The developer team tried to get information from this, but the people who assigned us the project couldn't answer some specific questions about it
+The developer team tried to get information from this, but the people who assigned us the project couldn't answer some specific questions about it.
 This is the result of the following document: 
 `https://docs.google.com/document/d/15bF5DUOa9mm7snna3L4cjy9d1f68F-iiJY7VZSgl39s/edit?usp=sharing`
 

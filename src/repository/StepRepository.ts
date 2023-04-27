@@ -47,6 +47,6 @@ export class StepRepository {
   public async bulkCreateCsv(stepBulkList: StepBulk[]): Promise<Step[]> {
     return Step.bulkCreate(stepBulkList.map((stepRequest) => ({
       ...stepRequest
-    })), { updateOnDuplicate: [ 'flowId', 'name', 'step' ], transaction: this.transaction })
+    })), { transaction: this.transaction })
   }
 }
