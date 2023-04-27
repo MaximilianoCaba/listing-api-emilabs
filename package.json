@@ -8,8 +8,6 @@
     "npm": ">= 7.10.0"
   },
   "scripts": {
-    "test": "jest",
-    "test:cov": "jest --coverage",
     "dev": "nodemon",
     "start": "ts-node index.ts",
     "generateToken": "ts-node src/script/generateToken.ts",
@@ -17,7 +15,9 @@
     "unmigrate": "npx sequelize-cli db:migrate:undo",
     "seed": "npx sequelize-cli db:seed:all",
     "unseed": "npx sequelize-cli db:seed:undo:all",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "test": "jest",
+    "test:cov": "jest --coverage"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
