@@ -27,9 +27,9 @@ export class ListingService {
 
       await stepService.updateStepsByListingId(listingId, listingCrud.steps || [], transaction)
 
-      const listingResponseList: ListingResponse[] = await listingRepository.findByIdIncludedSubsidiaryAndCountryAndCompany(listingId)
-
       await transaction.commit()
+
+      const listingResponseList: ListingResponse[] = await listingRepository.findByIdIncludedSubsidiaryAndCountryAndCompany(listingId)
 
       return listingResponseList[0]
     } catch (error) {

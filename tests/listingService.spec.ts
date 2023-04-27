@@ -24,6 +24,14 @@ describe('ListingService', () => {
             'fistStep': 'test',
             'secondStep': 'test'
           }
+        },
+        {
+          'flowId': 1,
+          'name': 'paso2',
+          'step': {
+            'fistStep': 'test',
+            'secondStep': 'test'
+          }
         }
       ]
     }

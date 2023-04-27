@@ -4,7 +4,7 @@
   "description": "Welcome to our technical challenge! We're excited to have you here and hope you're ready to showcase your skills.",
   "main": "index.js",
   "engines": {
-    "node": ">= 18.0.0",
+    "node": ">= 16.13.1",
     "npm": ">= 8.1.0"
   },
   "scripts": {
@@ -44,7 +44,6 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
-    "pg-hstore": "^2.3.4",
     "sequelize": "^6.30.0",
     "stream": "^0.0.2",
     "ts-node": "^10.9.1",
